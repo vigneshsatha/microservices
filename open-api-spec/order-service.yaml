@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Order Service
+  description: |-
+    Simple microserivce that exposes Order API's
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: http://localhost:9090
+tags:
+  - name: order
+    description: Order API's
+paths:
+  /order:
+    get:
+      tags:
+        - order
+      summary: Get Order by Customer id
+      operationId: getOrderByCustomerId
+      parameters:
+        - name: customerId
+          in: query
+          description: Customer ID
+          required: true
+          schema:
+            type: string
+            default: 1ddd9bf7-014a-44e2-a377-f1937782e1e6
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    
+  
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        customerId:
+          type: string
+          example: "1ddd9bf7-014a-44e2-a377-f1937782e1e6"
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: "Mac Studio"
+              price:
+                type: number
+                example: 2000.00
+            
+    
